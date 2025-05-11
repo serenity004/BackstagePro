@@ -1,0 +1,90 @@
+{
+  "name": "backstage-pro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Professional show control and stage management application",
+  "author": "Serenity",
+  "main": "public/electron.js",
+  "homepage": "./",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "electron-is-dev": "^3.0.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.1",
+    "lucide-react": "^0.263.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.1.5",
+    "react-scripts": "5.0.1",
+    "tailwindcss": "^3.4.1",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "wait-on": "^7.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && copy public\\preload.js build\\preload.js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"set BROWSER=none && npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "electron-builder build --win -c.extraMetadata.main=build/electron.js",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "build": {
+    "appId": "com.serenity.backstagepro",
+    "productName": "BackstagePro",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "public/preload.js"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "icon": "assets/icon.png",
+      "category": "public.app-category.utilities"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "category": "Utility"
+    }
+  }
+}
